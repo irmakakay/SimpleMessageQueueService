@@ -3,14 +3,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using MessageQueue.Common;
     using StackExchange.Redis;
 
     public class RedisCacheStore : IRedisCacheStore
     {
         private readonly IRedisConnectionFactory _connectionFactory;
-        private readonly ICacheSerializer _serializer;
+        private readonly IMessageSerializer _serializer;
 
-        public RedisCacheStore(IRedisConnectionFactory connectionFactory, ICacheSerializer serializer)
+        public RedisCacheStore(IRedisConnectionFactory connectionFactory, IMessageSerializer serializer)
         {
             _connectionFactory = connectionFactory;
             _serializer = serializer;

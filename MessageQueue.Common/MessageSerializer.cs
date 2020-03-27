@@ -1,10 +1,10 @@
-﻿namespace MessageQueue.Infrastructure.Cache
+﻿namespace MessageQueue.Common
 {
     using System;
     using System.Net.Http.Headers;
     using Newtonsoft.Json;
 
-    public class CacheSerializer : ICacheSerializer
+    public class MessageSerializer : IMessageSerializer
     {
         public string Serialize<T>(T value)
         {

@@ -1,8 +1,8 @@
-﻿namespace MessageQueue.Infrastructure.Cache
+﻿namespace MessageQueue.Common
 {
     using System;
 
-    public interface ICacheSerializer
+    public interface IMessageSerializer
     {
         string Serialize<T>(T value);
 

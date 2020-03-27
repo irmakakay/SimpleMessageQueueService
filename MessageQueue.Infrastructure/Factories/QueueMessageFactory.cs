@@ -2,7 +2,6 @@
 {
     using System;
     using MessageQueue.Common;
-    using MessageQueue.Infrastructure.Providers;
 
     public class QueueMessageFactory : IQueueMessageFactory
     {

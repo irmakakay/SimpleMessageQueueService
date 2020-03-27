@@ -1,5 +1,6 @@
 ﻿namespace MessageQueue.Infrastructure
 {
+    using MessageQueue.Common;
     using MessageQueue.Infrastructure.Cache;
     using MessageQueue.Infrastructure.Factories;
     using MessageQueue.Infrastructure.Providers;

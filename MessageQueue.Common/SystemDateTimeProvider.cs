@@ -1,4 +1,4 @@
-﻿namespace MessageQueue.Infrastructure.Providers
+﻿namespace MessageQueue.Common
 {
     using System;
 
