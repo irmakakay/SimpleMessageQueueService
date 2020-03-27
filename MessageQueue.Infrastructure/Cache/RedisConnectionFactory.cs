@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using MessageQueue.Infrastructure.Extensions;
     using MessageQueue.Logging;
     using NeoSmart.AsyncLock;
     using StackExchange.Redis;
@@ -11,6 +12,7 @@
         private readonly IRedisCacheConfiguration _configuration;
         private readonly ILogger _logger;
         private readonly AsyncLock _lock = new AsyncLock();
+        private readonly Lazy<ConfigurationOptions> _lazyConfigurationOptions;
 
         private volatile ConnectionMultiplexer _connection;
 
@@ -18,6 +20,7 @@
         {
             _configuration = configuration;
             _logger = logger;
+            _lazyConfigurationOptions = new Lazy<ConfigurationOptions>(GetConfigurationOptions);
         }
 
         public async Task<IDatabase> GetDatabaseAsync() =>
@@ -25,21 +28,20 @@
 
         private async Task<ConnectionMultiplexer> GetRedisAsync()
         {
-            if (_connection != null && _connection.IsConnected) return _connection;
+            if (_connection.IsOpen()) return _connection;
+
             using (await _lock.LockAsync().ConfigureAwait(false))
             {
                 return _connection = await ConnectToRedisAsync().ConfigureAwait(false);
             }
         }
 
-        public async Task<ConnectionMultiplexer> ConnectToRedisAsync()
+        private async Task<ConnectionMultiplexer> ConnectToRedisAsync()
         {
             try
             {
-                var connection = await ConnectionMultiplexer.ConnectAsync(_configuration.ConnectionString)
+                var connection = await ConnectionMultiplexer.ConnectAsync(_lazyConfigurationOptions.Value)
                                      .ConfigureAwait(false);
-
-                connection.PreserveAsyncOrder = false;
 
                 _logger.Debug("New Redis ConnectionMultiplexer created");
 
@@ -51,5 +53,14 @@
                 throw;
             }
         }
+
+        private ConfigurationOptions GetConfigurationOptions() =>
+            new ConfigurationOptions
+            {
+                EndPoints = { _configuration.ConnectionString },
+                ConnectRetry = 3,
+                ReconnectRetryPolicy = new ExponentialRetry(TimeSpan.FromSeconds(5).Milliseconds, TimeSpan.FromSeconds(20).Milliseconds),
+                ConnectTimeout = 2000
+            };
     }
 }
