@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MessageQueue.Common.Extensions
+﻿namespace MessageQueue.Common.Extensions
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
 

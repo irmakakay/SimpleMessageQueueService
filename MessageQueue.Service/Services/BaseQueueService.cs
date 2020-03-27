@@ -50,7 +50,8 @@
                 _logger.Debug($"Adding [{data}] to the queue.");
 
                 return await GetQueueExceptionPolicy()
-                    .ExecuteAsync(async () => await MessageQueue.EnqueueAsync(data, messageId));
+                    .ExecuteAsync(async () => await MessageQueue.EnqueueAsync(data, messageId).ConfigureAwait(false))
+                    .ConfigureAwait(false);
             }
             catch (MessageQueueException e)
             {
@@ -72,18 +73,21 @@
                 try
                 {
                     message = await GetQueueExceptionPolicy()
-                        .ExecuteAsync(async () => await fetchTask.ConfigureAwait(false));
+                        .ExecuteAsync(async () => await fetchTask.ConfigureAwait(false))
+                        .ConfigureAwait(false);
 
                     if (!Validate(message))
                     {
-                        HandleInvalidMessage(message, batchResult, nameof(FetchAndProcessDataAsync));
+                        _requestValidator.HandleInvalidMessage(message, batchResult, nameof(FetchAndProcessDataAsync));
                         continue;
                     }
 
                     var result = await Policy.Handle<MessageFetchAndProcessException>()
                         .WaitAndRetryAsync(GetRetrySleepDurations(Configuration.RetryInMessageProcess))
                         .ExecuteAsync(async () => await QueueServiceMessageHelpers
-                            .ProcessMessageAsync(message, processFunc).ConfigureAwait(false));
+                            .ProcessMessageAsync(message, processFunc)
+                            .ConfigureAwait(false))
+                        .ConfigureAwait(false);
 
                     _logger.Debug(result.ItemDescription);
 
@@ -108,7 +112,7 @@
                         continue;
                     }
 
-                    await MessageQueue.EnqueueAsync(message.Data, message.Id);
+                    await MessageQueue.EnqueueAsync(message.Data, message.Id).ConfigureAwait(false);
                 }
             }
 
@@ -132,7 +136,7 @@
 
                     if (!Validate(message))
                     {
-                        HandleInvalidMessage(message, batchResult, nameof(FetchAndProcessDataManyAsync));                        
+                        _requestValidator.HandleInvalidMessage(message, batchResult, nameof(FetchAndProcessDataManyAsync));                        
                         continue;
                     }
 
@@ -172,12 +176,14 @@
 
         public async Task<IEnumerable<TData>> GetManyAsync(long startIndex = 0)
         {
-            return await GetManyAsync(m => m.Select(_ => _.Data), startIndex).ConfigureAwait(false);
+            return await GetManyAsync(m => m.Select(_ => _.Data), startIndex)
+                       .ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<string>> GetManyAsStringAsync(long startIndex = 0)
         {
-            return await GetManyAsync(m => m.Select(_ => _.Data.MessageDescriptor), startIndex).ConfigureAwait(false);
+            return await GetManyAsync(m => m.Select(_ => _.Data.MessageDescriptor), startIndex)
+                       .ConfigureAwait(false);
         }
 
         public async Task<long> GetTotalItemCountAsync()
@@ -234,23 +240,6 @@
                 _logger.Error("Error while reading queue items.", e);
 
                 throw;
-            }
-        }
-
-        private void HandleInvalidMessage(IQueueMessage<TData> message, QueueServiceBatchResult result, string methodName)
-        {
-            if (message == null)
-            {
-                result.NullMessageCount++;                
-            }
-            else
-            {
-                var e = new QueueMessageValidationException(
-                    $"Error while validating message. Message Id: {message.Id}");
-
-                _logger.Error( e.Message, e);
-
-                result.FailureCount++;
             }
         }
     }

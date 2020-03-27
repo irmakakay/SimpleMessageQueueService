@@ -27,12 +27,14 @@
         {
             if (message == null)
             {
+                result.NullMessageCount++;
                 _logger.Warn("Queue message is null, skipping.");
             }
             else
             {
                 var e = new QueueMessageValidationException(
                     $"Error while validating message. Message Id: {message.Id}");
+                
                 _logger.Error(e.Message, e);
 
                 result.FailureCount++;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MessageQueue.Service.Services
+﻿namespace MessageQueue.Service.Services
 {
+    using System;
     using MessageQueue.Service.Configuration;
 
     public interface IConfigurationService
