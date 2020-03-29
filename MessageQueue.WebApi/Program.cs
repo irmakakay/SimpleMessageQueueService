@@ -31,7 +31,13 @@ namespace MessageQueue.WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureKestrel(serverOptions =>
+                    {
+                        serverOptions.Limits.MaxConcurrentConnections = 100;
+                        serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromMilliseconds(60000);
+                    })
+                    .UseUrls("http://+:5000")
+                    .UseStartup<Startup>();
                 })
                 .UseSerilog();
     }

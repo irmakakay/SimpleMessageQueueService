@@ -17,7 +17,7 @@
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(AppSettings.ToFileName(JsonExtension), optional: false, reloadOnChange: true)
-            .AddJsonFile(AppSettings.FormatFileName(ExtendedFileNameSection, "json"), optional: true)
+            .AddJsonFile(AppSettings.FormatFileName(ExtendedFileNameSection, JsonExtension), optional: true)
             .AddEnvironmentVariables()
             .Build();
 
