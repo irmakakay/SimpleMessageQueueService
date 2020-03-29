@@ -13,7 +13,7 @@ namespace MessageQueue.WebApi
 
             try
             {
-                Log.Information("Getting the motors running...");
+                Log.Information("Initializing...");
 
                 CreateHostBuilder(args).Build().Run();
             }

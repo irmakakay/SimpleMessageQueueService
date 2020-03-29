@@ -12,7 +12,6 @@
         {
             container.Register<IRedisConnectionFactory, RedisConnectionFactory>(Lifestyle.Singleton);
             container.Register<IRedisCacheStore, RedisCacheStore>(Lifestyle.Singleton);
-            container.Register<IDateTimeProvider, SystemDateTimeProvider>(Lifestyle.Singleton);
             container.Register<IQueueMessageFactory, QueueMessageFactory>(Lifestyle.Singleton);
             container.Register<IMessageQueueProvider, MessageQueueProvider>(Lifestyle.Singleton);
 

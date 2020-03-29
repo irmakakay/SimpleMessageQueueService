@@ -19,5 +19,9 @@
     <ProjectReference Include="..\MessageQueue.Service\MessageQueue.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 
 </Project>

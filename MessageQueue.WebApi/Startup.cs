@@ -36,10 +36,10 @@ namespace MessageQueue.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
 
             app.UseSerilogRequestLogging(options =>
             {
@@ -57,8 +57,9 @@ namespace MessageQueue.WebApi
                 };
             });
 
-            // TODO - use the overload with handler options arg.
-            app.UseExceptionHandler();
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 

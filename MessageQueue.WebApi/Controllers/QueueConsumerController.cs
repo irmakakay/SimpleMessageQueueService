@@ -6,7 +6,7 @@
     using Microsoft.Extensions.Logging;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/consumer")]
     public class QueueConsumerController : ControllerBase
     {
         private readonly ILogger<QueueConsumerController> _logger;
@@ -21,7 +21,7 @@
         {
             _logger.LogDebug("Testing my shit!!!");
 
-            throw new AuthenticationException();
+            throw new AuthenticationException("Some interesting error!");
         }
     }
 }
