@@ -4,13 +4,15 @@
     using MessageQueue.Service.Validators;
     using SimpleInjector;
 
-    public static class QueueServiceBootstrapper
+    public static class ServiceBootstrapper
     {
-        public static void Configure(Container container)
+        public static Container Configure(Container container)
         {
             container.Register(typeof(IQueueMessageValidator<>), typeof(IQueueMessageValidator<>).Assembly);
             container.Register<IConfigurationService, ConfigurationService>(Lifestyle.Singleton);
             container.Register<IServiceVersionQueueService, ServiceVersionQueueService>(Lifestyle.Singleton);
+
+            return container;
         }
     }
 }

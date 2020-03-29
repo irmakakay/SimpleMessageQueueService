@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Common", "Mess
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Service", "MessageQueue.Service\MessageQueue.Service.csproj", "{EF4CC868-F5B4-48CA-B883-C28320C504B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.WebApi", "MessageQueue.WebApi\MessageQueue.WebApi.csproj", "{E18E5DD2-9883-4046-A803-DE3D837B3DB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EF4CC868-F5B4-48CA-B883-C28320C504B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF4CC868-F5B4-48CA-B883-C28320C504B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF4CC868-F5B4-48CA-B883-C28320C504B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18E5DD2-9883-4046-A803-DE3D837B3DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18E5DD2-9883-4046-A803-DE3D837B3DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18E5DD2-9883-4046-A803-DE3D837B3DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18E5DD2-9883-4046-A803-DE3D837B3DB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
