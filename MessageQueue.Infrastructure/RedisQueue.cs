@@ -8,7 +8,7 @@
     using MessageQueue.Infrastructure.Exceptions;
     using MessageQueue.Infrastructure.Factories;
     using MessageQueue.Infrastructure.Helpers;
-    using MessageQueue.Logging;
+    using Microsoft.Extensions.Logging;
 
     public class RedisQueue<TData> : IQueue<TData> where TData : IMessageData
     {
@@ -31,7 +31,7 @@
                 var key = QueueHelpers.GetRedisKey<TData>();
 
                 var count = await _redisCache.ListRightPushAsync(key, message).ConfigureAwait(false);
-                _logger.Debug($"Current number of elements in the {key} queue: {count}");
+                _logger.LogDebug($"Current number of elements in the {key} queue: {count}");
 
                 return message.Id;
             }
@@ -82,7 +82,7 @@
 
         private MessageQueueException HandleException(string methodName, string message, Exception e)
         {
-            _logger.Error(message, e);
+            _logger.LogError(message, e);
 
             return new MessageQueueException(message, e);
         }

@@ -6,6 +6,8 @@
     using Microsoft.Extensions.Configuration;
     using Serilog;
     using Serilog.Core;
+    using Serilog.Settings.Configuration;
+    using Serilog.Formatting.Compact;
 
     public static class LogInitializer
     {
@@ -26,8 +28,7 @@
                 .ReadFrom.Configuration(Configuration)
                 .Enrich.FromLogContext()
                 .WriteTo.Debug()
-                .WriteTo.Console(
-                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+                .WriteTo.Console(new RenderedCompactJsonFormatter())
                 .CreateLogger();
 
         private static string ExtendedFileNameSection => $"{Environment.GetEnvironmentVariable(AspNetCoreEnv) ?? ProductionName}";

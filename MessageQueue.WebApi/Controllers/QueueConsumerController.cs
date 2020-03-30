@@ -6,7 +6,7 @@
     using Microsoft.Extensions.Logging;
 
     [ApiController]
-    [Route("api/consumer")]
+    [Route("api/[controller]")]
     public class QueueConsumerController : ControllerBase
     {
         private readonly ILogger<QueueConsumerController> _logger;

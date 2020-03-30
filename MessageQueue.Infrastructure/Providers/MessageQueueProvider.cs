@@ -3,7 +3,7 @@
     using MessageQueue.Common;
     using MessageQueue.Infrastructure.Cache;
     using MessageQueue.Infrastructure.Factories;
-    using MessageQueue.Logging;
+    using Microsoft.Extensions.Logging;
 
     public class MessageQueueProvider : IMessageQueueProvider
     {

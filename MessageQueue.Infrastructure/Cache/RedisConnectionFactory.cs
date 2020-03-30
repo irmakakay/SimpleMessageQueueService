@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using MessageQueue.Infrastructure.Extensions;
-    using MessageQueue.Logging;
+    using Microsoft.Extensions.Logging;
     using NeoSmart.AsyncLock;
     using StackExchange.Redis;
 
@@ -43,13 +43,13 @@
                 var connection = await ConnectionMultiplexer.ConnectAsync(_lazyConfigurationOptions.Value)
                                      .ConfigureAwait(false);
 
-                _logger.Debug("New Redis ConnectionMultiplexer created");
+                _logger.LogDebug("New Redis ConnectionMultiplexer created");
 
                 return connection;
             }
             catch (Exception ex)
             {
-                _logger.Error("There was a problem connecting to Redis", ex);
+                _logger.LogError("There was a problem connecting to Redis", ex);
                 throw;
             }
         }

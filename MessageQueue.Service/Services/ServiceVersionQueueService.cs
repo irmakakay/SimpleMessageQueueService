@@ -6,9 +6,9 @@
     using System.Threading.Tasks;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Providers;
-    using MessageQueue.Logging;
     using MessageQueue.Service.Model;
     using MessageQueue.Service.Validators;
+    using Microsoft.Extensions.Logging;
 
     public class ServiceVersionQueueService 
         : BaseQueueService<ServiceVersionRequest, ServiceVersionResponse>, IServiceVersionQueueService

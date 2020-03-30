@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/consumer",
+      "launchUrl": "api/queueconsumer",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "MessageQueue.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/consumer",
+      "launchUrl": "api/queueconsumer",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

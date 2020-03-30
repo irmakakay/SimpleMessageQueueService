@@ -1,9 +1,9 @@
 ﻿namespace MessageQueue.Service.Validators
 {
     using MessageQueue.Infrastructure;
-    using MessageQueue.Logging;
     using MessageQueue.Service.Exceptions;
     using MessageQueue.Service.Model;
+    using Microsoft.Extensions.Logging;
 
     public class ServiceVersionMessageValidator : IQueueMessageValidator<ServiceVersionRequest>
     {
@@ -28,14 +28,14 @@
             if (message == null)
             {
                 result.NullMessageCount++;
-                _logger.Warn("Queue message is null, skipping.");
+                _logger.LogWarning("Queue message is null, skipping.");
             }
             else
             {
                 var e = new QueueMessageValidationException(
                     $"Error while validating message. Message Id: {message.Id}");
                 
-                _logger.Error(e.Message, e);
+                _logger.LogError(e.Message, e);
 
                 result.FailureCount++;
             }

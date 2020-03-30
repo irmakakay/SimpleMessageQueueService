@@ -10,11 +10,11 @@
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Exceptions;
     using MessageQueue.Infrastructure.Providers;
-    using MessageQueue.Logging;
     using MessageQueue.Service.Configuration;
     using MessageQueue.Service.Exceptions;
     using MessageQueue.Service.Helpers;
     using MessageQueue.Service.Validators;
+    using Microsoft.Extensions.Logging;
     using Polly;
     using Polly.Retry;
 
@@ -47,7 +47,7 @@
             {
                 if (!Validate(data)) throw new QueueMessageValidationException(data.ToString());
 
-                _logger.Debug($"Adding [{data}] to the queue.");
+                _logger.LogDebug($"Adding [{data}] to the queue.");
 
                 return await GetQueueExceptionPolicy()
                     .ExecuteAsync(async () => await MessageQueue.EnqueueAsync(data, messageId).ConfigureAwait(false))
@@ -55,7 +55,7 @@
             }
             catch (MessageQueueException e)
             {
-                _logger.Error("Error while adding message to the queue.", e);
+                _logger.LogError("Error while adding message to the queue.", e);
 
                 throw;
             }
@@ -89,26 +89,26 @@
                             .ConfigureAwait(false))
                         .ConfigureAwait(false);
 
-                    _logger.Debug(result.ItemDescription);
+                    _logger.LogDebug(result.ItemDescription);
 
                     batchResult.SuccessCount++;
                 }
                 catch (MessageQueueException e)
                 {
-                    _logger.Error("Error while fetching queue item. Item will remain in the queue.", e);
+                    _logger.LogError("Error while fetching queue item. Item will remain in the queue.", e);
 
                     batchResult.FailureCount++;
                 }
                 catch (MessageFetchAndProcessException e)
                 {
-                    _logger.Error(
+                    _logger.LogError(
                         "Error while processing message data. Adding the data back to the message queue for the next run.", e);
 
                     batchResult.FailureCount++;
 
                     if (message == null)
                     {
-                        _logger.Warn("Queue message is null, skipping.");
+                        _logger.LogWarning("Queue message is null, skipping.");
                         continue;
                     }
 
@@ -144,7 +144,7 @@
                 }
                 catch (MessageQueueException e)
                 {
-                    _logger.Error("Error while fetching queue item. Item will remain in the queue.", e);
+                    _logger.LogError("Error while fetching queue item. Item will remain in the queue.", e);
 
                     batchResult.FailureCount++;
                 }
@@ -161,7 +161,7 @@
                 }
                 catch (MessageFetchAndProcessException e)
                 {
-                    _logger.Error(
+                    _logger.LogError(
                         "Error while processing messages. Adding the data back to the message queue for the next run.", e);
 
                     batchResult.FailureCount += processBatch.Count;
@@ -194,7 +194,7 @@
             }
             catch (MessageQueueException e)
             {
-                _logger.Error("Error while fetching queue length.", e);
+                _logger.LogError("Error while fetching queue length.", e);
 
                 throw;
             }
@@ -237,7 +237,7 @@
             }
             catch (MessageQueueException e)
             {
-                _logger.Error("Error while reading queue items.", e);
+                _logger.LogError("Error while reading queue items.", e);
 
                 throw;
             }
