@@ -2,8 +2,9 @@
 {
     using System;
     using MessageQueue.Common;
+    using MessageQueue.Common.Mapping;
 
-    public class ServiceVersionResponse : IProcessedItemInBatch
+    public class ServiceVersionResponse : IProcessedItemInBatch, IMapperTarget
     {
         public Guid ServiceId { get; set; }
 

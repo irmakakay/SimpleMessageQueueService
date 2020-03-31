@@ -22,7 +22,7 @@
     /// <param name="source"></param>
     /// <returns></returns>
     TDestination Map<TSource, TDestination>(TSource source)
-      where TSource : IMapperSource where TDestination : IMapperDestination;
+      where TSource : IMapperSource where TDestination : IMapperTarget;
 
     /// <summary>
     /// Create Mapping from source to destination list
@@ -32,7 +32,7 @@
     /// <param name="source"></param>
     /// <returns></returns>
     IEnumerable<TDestination> MapList<TSource, TDestination>(IEnumerable<TSource> source)
-      where TSource : IMapperSource where TDestination : IMapperDestination;
+      where TSource : IMapperSource where TDestination : IMapperTarget;
 
     /// <summary>
     /// Create Mapping from source to destination list
@@ -43,6 +43,6 @@
     /// <typeparam name="TDestination"></typeparam>
     /// <returns></returns>
     IEnumerable<TDestination> MapList<TSource, TDestination>(IEnumerable<TSource> source,
-      System.Action<IMappingOperationOptions> opts) where TSource : IMapperSource where TDestination : IMapperDestination;
+      System.Action<IMappingOperationOptions> opts) where TSource : IMapperSource where TDestination : IMapperTarget;
   }
 }

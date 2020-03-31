@@ -3,8 +3,9 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using MessageQueue.Common;
+    using MessageQueue.Common.Mapping;
 
-    public class ServiceVersionRequest : IMessageData
+    public class ServiceVersionRequest : IMessageData, IMapperSource
     {
         [Required]
         public Guid ServiceId { get; set; }

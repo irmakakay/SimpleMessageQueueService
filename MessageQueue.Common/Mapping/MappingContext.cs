@@ -19,17 +19,17 @@
 
         public TDestination Map<TSource, TDestination>(TSource source) 
             where TSource : IMapperSource 
-            where TDestination : IMapperDestination =>
+            where TDestination : IMapperTarget =>
             Mapper.Map<TDestination>(source);
 
         public IEnumerable<TDestination> MapList<TSource, TDestination>(IEnumerable<TSource> source) 
             where TSource : IMapperSource 
-            where TDestination : IMapperDestination =>
+            where TDestination : IMapperTarget =>
             Mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(source);
 
         public IEnumerable<TDestination> MapList<TSource, TDestination>(IEnumerable<TSource> source, Action<IMappingOperationOptions> opts) 
             where TSource : IMapperSource 
-            where TDestination : IMapperDestination =>
+            where TDestination : IMapperTarget =>
             Mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(source, opts);
 
         private IMapper Mapper => _configurationProvider.CreateMapper();

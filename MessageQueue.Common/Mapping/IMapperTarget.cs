@@ -1,6 +1,6 @@
 ﻿namespace MessageQueue.Common.Mapping
 {
-    public interface IMapperDestination
+    public interface IMapperTarget
   {
   }
 }
