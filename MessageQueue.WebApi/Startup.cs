@@ -1,5 +1,6 @@
 namespace MessageQueue.WebApi
 {
+    using MessageQueue.WebApi.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -24,6 +25,9 @@ namespace MessageQueue.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddControllers(options =>
+                options.Filters.Add(new GlobalExceptionFilter()));
+
             services.UseSimpleInjectorAspNetRequestScoping(_container);
             
             WebApiBootstrapper.Configure(_container);

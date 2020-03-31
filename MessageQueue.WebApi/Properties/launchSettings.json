@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/queueconsumer",
+      "launchUrl": "api/QueueProducer",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "MessageQueue.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/queueconsumer",
+      "launchUrl": "api/QueueProducer",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/consumer",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/QueueProducer",
       "publishAllPorts": true,
       "useSSL": true
     }

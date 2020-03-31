@@ -1,6 +1,6 @@
 ﻿namespace MessageQueue.Service.Services
 {
-    using MessageQueue.Service.Model;
+    using MessageQueue.Common.Model;
 
     public interface IServiceVersionQueueService
         : IQueueService<ServiceVersionRequest, ServiceVersionResponse>

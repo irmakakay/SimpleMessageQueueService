@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using MessageQueue.Common.Model;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Providers;
-    using MessageQueue.Service.Model;
     using MessageQueue.Service.Validators;
     using Microsoft.Extensions.Logging;
 

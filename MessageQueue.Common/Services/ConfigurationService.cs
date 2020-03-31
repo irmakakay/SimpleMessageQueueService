@@ -1,5 +1,6 @@
-﻿namespace MessageQueue.Service.Services
+﻿namespace MessageQueue.Common.Services
 {
+    using System;
     using MessageQueue.Common.Configuration;
 
     public class ConfigurationService : IConfigurationService

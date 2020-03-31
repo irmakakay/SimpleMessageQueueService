@@ -9,7 +9,6 @@
         public static Container Configure(Container container)
         {
             container.Register(typeof(IQueueMessageValidator<>), typeof(IQueueMessageValidator<>).Assembly);
-            container.Register<IConfigurationService, ConfigurationService>(Lifestyle.Singleton);
             container.Register<IServiceVersionQueueService, ServiceVersionQueueService>(Lifestyle.Singleton);
 
             return container;

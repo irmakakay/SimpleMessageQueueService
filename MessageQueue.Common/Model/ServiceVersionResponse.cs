@@ -1,4 +1,4 @@
-﻿namespace MessageQueue.Service.Model
+﻿namespace MessageQueue.Common.Model
 {
     using System;
     using MessageQueue.Common;

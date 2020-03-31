@@ -6,11 +6,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using MessageQueue.Common;
+    using MessageQueue.Common.Configuration;
     using MessageQueue.Common.Extensions;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Exceptions;
     using MessageQueue.Infrastructure.Providers;
-    using MessageQueue.Service.Configuration;
     using MessageQueue.Service.Exceptions;
     using MessageQueue.Service.Helpers;
     using MessageQueue.Service.Validators;

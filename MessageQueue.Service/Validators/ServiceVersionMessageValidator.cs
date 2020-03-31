@@ -1,8 +1,8 @@
 ﻿namespace MessageQueue.Service.Validators
 {
+    using MessageQueue.Common.Model;
     using MessageQueue.Infrastructure;
     using MessageQueue.Service.Exceptions;
-    using MessageQueue.Service.Model;
     using Microsoft.Extensions.Logging;
 
     public class ServiceVersionMessageValidator : IQueueMessageValidator<ServiceVersionRequest>
