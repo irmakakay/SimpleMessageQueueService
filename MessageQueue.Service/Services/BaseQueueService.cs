@@ -8,6 +8,7 @@
     using MessageQueue.Common;
     using MessageQueue.Common.Configuration;
     using MessageQueue.Common.Extensions;
+    using MessageQueue.Common.Services;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Exceptions;
     using MessageQueue.Infrastructure.Providers;

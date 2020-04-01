@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using MessageQueue.Common.Model;
+    using MessageQueue.Common.Services;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Providers;
     using MessageQueue.Service.Validators;

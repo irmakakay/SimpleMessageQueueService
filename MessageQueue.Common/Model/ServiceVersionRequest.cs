@@ -16,5 +16,8 @@
         public string Text { get; set; }
 
         public string ItemDescription { get; set; }
+
+        public override string ToString() =>
+            $"ServiceId: {ServiceId}, MessageDescriptor: {MessageDescriptor}";
     }
 }
