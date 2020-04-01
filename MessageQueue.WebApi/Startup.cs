@@ -24,13 +24,10 @@ namespace MessageQueue.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddControllers(options =>
                 options.Filters.Add(new GlobalExceptionFilter()));
 
-            services.UseSimpleInjectorAspNetRequestScoping(_container);
-            
-            WebApiBootstrapper.Configure(_container);
+            ConfigureSimpleInjector(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +68,17 @@ namespace MessageQueue.WebApi
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureSimpleInjector(IServiceCollection services)
+        {
+            //_container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
+            services.AddSimpleInjector(_container);
+            services.UseSimpleInjectorAspNetRequestScoping(_container);
+
+            WebApiBootstrapper.RegisterServices(services);
+            //WebApiBootstrapper.Configure(_container);
         }
     }
 }

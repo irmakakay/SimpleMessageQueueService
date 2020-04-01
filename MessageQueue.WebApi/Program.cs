@@ -1,6 +1,7 @@
 namespace MessageQueue.WebApi
 {
     using System;
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
     using Serilog;
@@ -13,6 +14,8 @@ namespace MessageQueue.WebApi
 
             try
             {
+
+
                 Log.Information("Initializing...");
 
                 CreateHostBuilder(args).Build().Run();
@@ -27,11 +30,17 @@ namespace MessageQueue.WebApi
             }
         }
 
+        //public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //        .UseStartup<Startup>()
+        //        .UseSerilog();
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(serverOptions =>
+                    webBuilder
+                    .ConfigureKestrel(serverOptions =>
                     {
                         serverOptions.Limits.MaxConcurrentConnections = 100;
                         serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromMilliseconds(60000);

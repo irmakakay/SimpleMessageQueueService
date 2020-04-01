@@ -36,16 +36,16 @@
         }
 
         [HttpPost]
-        //[ResponseType(typeof(ServiceVersionResponse))]
-        //[ValidationModelStateFilter]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public async Task<IActionResult> AddAsync(ServiceVersionRequest incoming)
         {
-            if (incoming == null) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            ServiceVersionResponse response;
             if (Configuration.ProducerEnabled)
             {
                 var messageId = await _queueService.AddDataAsync(incoming).ConfigureAwait(false);

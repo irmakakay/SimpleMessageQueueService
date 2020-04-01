@@ -4,10 +4,22 @@
     using MessageQueue.Common.Mapping;
     using MessageQueue.Common.Model;
     using MessageQueue.Common.Services;
+    using Microsoft.Extensions.DependencyInjection;
     using SimpleInjector;
 
     public static class CommonBootstrapper
     {
+        public static void Configure(IServiceCollection services)
+        {
+            services.AddSingleton<IConfigurationService, ConfigurationService>();
+            services.AddSingleton<IMessageSerializer, MessageSerializer>();
+            services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+            services.AddSingleton<IMappingContext, MappingContext>();
+
+            services.AddTransient<IConfigurationProvider>(
+                _ => new MapperConfiguration(cfg => cfg.CreateMap<ServiceVersionRequest, ServiceVersionResponse>()));
+        }
+
         public static Container Configure(Container container)
         {
             container.Register<IConfigurationService, ConfigurationService>(Lifestyle.Singleton);
