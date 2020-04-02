@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using MessageQueue.Configuration.Sections;
+    using MessageQueue.Configuration.Services;
     using MessageQueue.Infrastructure.Extensions;
     using Microsoft.Extensions.Logging;
     using NeoSmart.AsyncLock;
@@ -10,16 +11,16 @@
 
     public class RedisConnectionFactory : IRedisConnectionFactory
     {
-        private readonly IRedisCacheConfiguration _configuration;
+        private readonly Lazy<IRedisCacheConfiguration> _lazyConfigurationService;
         private readonly ILogger<RedisConnectionFactory> _logger;
         private readonly AsyncLock _lock = new AsyncLock();
         private readonly Lazy<ConfigurationOptions> _lazyConfigurationOptions;
 
         private volatile ConnectionMultiplexer _connection;
 
-        public RedisConnectionFactory(IRedisCacheConfiguration configuration, ILogger<RedisConnectionFactory> logger)
+        public RedisConnectionFactory(IConfigurationService configurationService, ILogger<RedisConnectionFactory> logger)
         {
-            _configuration = configuration;
+            _lazyConfigurationService = new Lazy<IRedisCacheConfiguration>(configurationService.GetRedisConfiguration);
             _logger = logger;
             _lazyConfigurationOptions = new Lazy<ConfigurationOptions>(GetConfigurationOptions);
         }
@@ -58,7 +59,7 @@
         private ConfigurationOptions GetConfigurationOptions() =>
             new ConfigurationOptions
             {
-                EndPoints = { _configuration.ConnectionString },
+                EndPoints = { _lazyConfigurationService.Value.ConnectionString },
                 ConnectRetry = 3,
                 ReconnectRetryPolicy = new ExponentialRetry(TimeSpan.FromSeconds(5).Milliseconds, TimeSpan.FromSeconds(20).Milliseconds),
                 ConnectTimeout = 2000

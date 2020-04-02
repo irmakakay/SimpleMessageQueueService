@@ -35,7 +35,7 @@
             _logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("/add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
