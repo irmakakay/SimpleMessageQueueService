@@ -1,4 +1,4 @@
-﻿namespace MessageQueue.Infrastructure.Cache
+﻿namespace MessageQueue.Configuration.Sections
 {
     public interface IRedisCacheConfiguration
     {

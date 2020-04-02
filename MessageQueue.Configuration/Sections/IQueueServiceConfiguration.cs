@@ -1,4 +1,4 @@
-﻿namespace MessageQueue.Common.Configuration
+﻿namespace MessageQueue.Configuration.Sections
 {
     public interface IQueueServiceConfiguration
     {

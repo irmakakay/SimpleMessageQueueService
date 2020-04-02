@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MessageQueue.Configuration\MessageQueue.Configuration.csproj" />
     <ProjectReference Include="..\MessageQueue.Infrastructure\MessageQueue.Infrastructure.csproj" />
     <ProjectReference Include="..\MessageQueue.Service\MessageQueue.Service.csproj" />
   </ItemGroup>

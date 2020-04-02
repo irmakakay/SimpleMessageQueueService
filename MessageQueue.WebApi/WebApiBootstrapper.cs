@@ -1,6 +1,7 @@
 ﻿namespace MessageQueue.WebApi
 {
     using MessageQueue.Common;
+    using MessageQueue.Configuration;
     using MessageQueue.Infrastructure;
     using MessageQueue.Service;
     using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@
     {
         public static void RegisterServices(IServiceCollection services)
         {
+            ConfigurationBootstrapper.Configure(services);
             CommonBootstrapper.Configure(services);
             InfrastructureBootstrapper.Configure(services);
             ServiceBootstrapper.Configure(services);
