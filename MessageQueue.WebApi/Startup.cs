@@ -72,12 +72,10 @@ namespace MessageQueue.WebApi
 
         private void ConfigureSimpleInjector(IServiceCollection services)
         {
-            //_container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-
             services.AddSimpleInjector(_container);
             services.UseSimpleInjectorAspNetRequestScoping(_container);
 
-            WebApiBootstrapper.RegisterServices(services);
+            WebApiBootstrapper.Configure(services);
             //WebApiBootstrapper.Configure(_container);
         }
     }

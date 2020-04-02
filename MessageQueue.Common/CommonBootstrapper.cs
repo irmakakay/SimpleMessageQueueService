@@ -3,7 +3,7 @@
     using AutoMapper;
     using MessageQueue.Common.Mapping;
     using MessageQueue.Common.Model;
-    using MessageQueue.Common.Services;
+    using MessageQueue.Configuration.Services;
     using Microsoft.Extensions.DependencyInjection;
     using SimpleInjector;
 

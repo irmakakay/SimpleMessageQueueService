@@ -7,9 +7,9 @@
 
     public class ServiceVersionMessageValidator : IQueueMessageValidator<ServiceVersionRequest>
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<ServiceVersionMessageValidator> _logger;
 
-        public ServiceVersionMessageValidator(ILogger logger)
+        public ServiceVersionMessageValidator(ILogger<ServiceVersionMessageValidator> logger)
         {
             _logger = logger;
         }

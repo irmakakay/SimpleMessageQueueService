@@ -14,9 +14,9 @@
     {
         private readonly IRedisCacheStore _redisCache;
         private readonly IQueueMessageFactory _messageFactory;
-        private readonly ILogger _logger;
+        private readonly ILogger<RedisQueue<TData>> _logger;
 
-        public RedisQueue(IRedisCacheStore redisCache, IQueueMessageFactory messageFactory, ILogger logger)
+        public RedisQueue(IRedisCacheStore redisCache, IQueueMessageFactory messageFactory, ILogger<RedisQueue<TData>> logger)
         {
             _redisCache = redisCache;
             _messageFactory = messageFactory;

@@ -9,7 +9,7 @@
 
     public static class WebApiBootstrapper
     {
-        public static void RegisterServices(IServiceCollection services)
+        public static void Configure(IServiceCollection services)
         {
             ConfigurationBootstrapper.Configure(services);
             CommonBootstrapper.Configure(services);

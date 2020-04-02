@@ -6,9 +6,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using MessageQueue.Common;
-    using MessageQueue.Common.Configuration;
     using MessageQueue.Common.Extensions;
-    using MessageQueue.Common.Services;
+    using MessageQueue.Configuration.Sections;
+    using MessageQueue.Configuration.Services;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Exceptions;
     using MessageQueue.Infrastructure.Providers;
@@ -28,13 +28,13 @@
         private readonly IConfigurationService _configurationService;
         private readonly Lazy<IQueue<TData>> _lazyQueue;
         private readonly IQueueMessageValidator<TData> _requestValidator;
-        private readonly ILogger _logger;
+        private readonly ILogger<IQueueService<TData, TResult>> _logger;
 
         protected BaseQueueService(
             IMessageQueueProvider queueProvider,
             IConfigurationService configurationService,
             IQueueMessageValidator<TData> requestValidator,
-            ILogger logger)
+            ILogger<IQueueService<TData, TResult>> logger)
         {
             _configurationService = configurationService;
             _lazyQueue = new Lazy<IQueue<TData>>(queueProvider.GetQueue<TData>);

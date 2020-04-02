@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using MessageQueue.Common.Model;
-    using MessageQueue.Common.Services;
+    using MessageQueue.Configuration.Services;
     using MessageQueue.Infrastructure;
     using MessageQueue.Infrastructure.Providers;
     using MessageQueue.Service.Validators;
@@ -18,7 +18,7 @@
             IMessageQueueProvider queueProvider,
             IConfigurationService configurationService,
             IQueueMessageValidator<ServiceVersionRequest> requestValidator,
-            ILogger logger)
+            ILogger<ServiceVersionQueueService> logger)
             : base(queueProvider, configurationService, requestValidator, logger)
         {
         }

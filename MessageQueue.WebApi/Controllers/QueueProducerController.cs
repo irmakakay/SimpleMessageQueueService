@@ -5,10 +5,10 @@
     using System.Net;
     using System.Security.Authentication;
     using System.Threading.Tasks;
-    using MessageQueue.Common.Configuration;
     using MessageQueue.Common.Mapping;
     using MessageQueue.Common.Model;
-    using MessageQueue.Common.Services;
+    using MessageQueue.Configuration.Sections;
+    using MessageQueue.Configuration.Services;
     using MessageQueue.Service.Services;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

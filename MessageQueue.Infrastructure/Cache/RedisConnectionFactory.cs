@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using MessageQueue.Configuration.Sections;
     using MessageQueue.Infrastructure.Extensions;
     using Microsoft.Extensions.Logging;
     using NeoSmart.AsyncLock;
@@ -10,13 +11,13 @@
     public class RedisConnectionFactory : IRedisConnectionFactory
     {
         private readonly IRedisCacheConfiguration _configuration;
-        private readonly ILogger _logger;
+        private readonly ILogger<RedisConnectionFactory> _logger;
         private readonly AsyncLock _lock = new AsyncLock();
         private readonly Lazy<ConfigurationOptions> _lazyConfigurationOptions;
 
         private volatile ConnectionMultiplexer _connection;
 
-        public RedisConnectionFactory(IRedisCacheConfiguration configuration, ILogger logger)
+        public RedisConnectionFactory(IRedisCacheConfiguration configuration, ILogger<RedisConnectionFactory> logger)
         {
             _configuration = configuration;
             _logger = logger;

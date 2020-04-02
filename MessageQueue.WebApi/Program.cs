@@ -1,7 +1,6 @@
 namespace MessageQueue.WebApi
 {
     using System;
-    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
     using Serilog;
@@ -14,8 +13,6 @@ namespace MessageQueue.WebApi
 
             try
             {
-
-
                 Log.Information("Initializing...");
 
                 CreateHostBuilder(args).Build().Run();
@@ -29,11 +26,6 @@ namespace MessageQueue.WebApi
                 Log.CloseAndFlush();
             }
         }
-
-        //public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-        //    WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>()
-        //        .UseSerilog();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
