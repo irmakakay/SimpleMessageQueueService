@@ -27,7 +27,9 @@ namespace MessageQueue.WebApi
             services.AddControllers(options =>
                 options.Filters.Add(new GlobalExceptionFilter()));
 
-            ConfigureSimpleInjector(services);
+            WebApiBootstrapper.Configure(services);
+            
+            //ConfigureSimpleInjector(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,9 +76,7 @@ namespace MessageQueue.WebApi
         {
             services.AddSimpleInjector(_container);
             services.UseSimpleInjectorAspNetRequestScoping(_container);
-
-            WebApiBootstrapper.Configure(services);
-            //WebApiBootstrapper.Configure(_container);
+            WebApiBootstrapper.Configure(_container);
         }
     }
 }

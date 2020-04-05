@@ -35,12 +35,14 @@
             _logger = logger;
         }
 
-        [HttpPost("/add")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public async Task<IActionResult> AddAsync(ServiceVersionRequest incoming)
         {
+            _logger.LogDebug("Testing basic POST");
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -61,7 +63,7 @@
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            _logger.LogDebug("Testing my shit!!!");
+            _logger.LogDebug("Testing basic GET");
 
             throw new AuthenticationException("Some interesting error!");
         }

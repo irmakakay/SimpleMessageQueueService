@@ -27,7 +27,7 @@
             {
                 context.Result = new ObjectResult(queueException.Message)
                 {
-                    StatusCode = (int)HttpStatusCode.BadGateway
+                    StatusCode = (int)HttpStatusCode.ServiceUnavailable
                 };
                 context.ExceptionHandled = true;
             }

@@ -37,7 +37,7 @@ namespace MessageQueue.WebApi
                         serverOptions.Limits.MaxConcurrentConnections = 100;
                         serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromMilliseconds(60000);
                     })
-                    .UseUrls("http://+:5000")
+                    .UseUrls("http://*:5000;https://*:5001")
                     .UseStartup<Startup>();
                 })
                 .UseSerilog();
